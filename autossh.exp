@@ -1,0 +1,34 @@
+#!/usr/bin/expect
+
+#verion:1.2
+#author:haiyang.song
+#modifed:2012-09-05
+
+# Check
+if {$argc<3} {
+        send_user "usage: $argv0 <server> <port> <username> <passwd>\n"
+        exit
+}
+
+set timeout  60
+
+set host [lindex $argv 0]
+set port [lindex $argv 1]
+set username [lindex $argv 2]
+set passwd [lindex $argv 3]
+
+spawn ssh -p $port $username@$host
+
+if {$argc==4} {
+    expect {
+        "(yes/no)?" {
+            send "yes\n"
+            expect "password:"
+            send "$passwd\n"
+        }
+            "password:" {
+            send "$passwd\n"
+        }
+     }
+ }
+interact

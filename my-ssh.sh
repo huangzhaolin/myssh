@@ -21,7 +21,7 @@ function select_host_go(){
 };
 #sshµ½Ö÷»ú
 function go_to_server(){
-	if [[ $1 > `cat $CONFIG|egrep -v "^#.*"|wc -l` ]]
+	if [[ $1 > `cat $CONFIG|egrep -v "^#.*"|wc -l|tr -d " "` ]]
 	then 
 	 	printf "\e[1;31mbad option!!\e[0m\n" 
                 select_console
@@ -83,7 +83,7 @@ function remove_host(){
 	show_all_hosts
 	printf "\e[1;31mselect remove host:\n\e[0m"
 	read host_id
-	if [[ $host_id > `cat $CONFIG|egrep -v "^#.*" | wc -l` ]]
+	if [[ $host_id > `cat $CONFIG|egrep -v "^#.*" | wc -l |tr -d " "` ]]
 	then
 		printf "\e[1;31m bad option\n"
 		remove_host

@@ -10,7 +10,7 @@ function select_console(){
 	    printf "<CTRL+C> to Quit\n"
     	    select_host_go
 }
-#Ñ¡ÔñÖ÷»ú,²¢µÇÂ½
+#Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Â½
 function select_host_go(){
 	read -p "choice your host:" host_id
 	case $host_id in
@@ -19,9 +19,9 @@ function select_host_go(){
 	* ) go_to_server $host_id;;
 	esac
 };
-#sshµ½Ö÷»ú
+#sshï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 function go_to_server(){
-	if [[ $1 > `cat $CONFIG|egrep -v "^#.*"|wc -l` ]]
+	if [[ $1 > `cat $CONFIG|egrep -v "^#.*"|wc -l|tr -d " "` ]]
 	then 
 	 	printf "\e[1;31mbad option!!\e[0m\n" 
                 select_console
@@ -41,7 +41,7 @@ function go_to_server(){
                 ~/.ssh/autossh.exp $server $port $username $passwd
         fi
 }
-#²é¿´ËùÓÐÖ÷»ú
+#ï¿½é¿´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 function show_all_hosts(){
 	cat $CONFIG|egrep -v "^#.*" | while read host;
     do
@@ -50,7 +50,7 @@ function show_all_hosts(){
             printf "\e[1;32m%5s %s\n" " " $index"."$host
     done
 }
-#Ôö¼ÓÖ÷»ú
+#ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 function add_host(){
 	printf "input:<nickname> <server> <port> <username> <passwd>:\n"
 	printf "\e[1;35msample:\e[1;34mmonitor-4 monitor4.dev.alipay.net 22 root alipay \e[0m\n"
@@ -78,12 +78,12 @@ function add_host(){
 	fi
 	select_console
 }
-#É¾³ýÖ÷»ú
+#É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 function remove_host(){
 	show_all_hosts
 	printf "\e[1;31mselect remove host:\n\e[0m"
 	read host_id
-	if [[ $host_id > `cat $CONFIG|egrep -v "^#.*" | wc -l` ]]
+	if [[ $host_id > `cat $CONFIG|egrep -v "^#.*" | wc -l|tr -d " "` ]]
 	then
 		printf "\e[1;31m bad option\n"
 		remove_host

@@ -9,21 +9,21 @@ if [ ! -w "$testPath" ]; then
 fi 
 
 rm -fr ~/.ssh/autossh.exp
-rm -fr /usr/bin/autossh
-rm -rf /usr/bin/my-ssh
+rm -fr /usr/local/bin/autossh
+rm -rf /usr/local/bin/my-ssh
 
 #复制文件
 cp autossh.exp ~/.ssh/autossh.exp
-cp autossh.sh /usr/bin/autossh
-cp my-ssh.sh /usr/bin/my-ssh
+cp autossh.sh /usr/local/bin/autossh
+cp my-ssh.sh /usr/local/bin/my-ssh
 
 if [[ ! -s  ~/.ssh/ssh_passwd ]]; then
 	cp ssh_passwd ~/.ssh/ssh_passwd
 fi
 
 #修改权限权限
-chmod +x /usr/bin/autossh
-chmod +x /usr/bin/my-ssh
+chmod +x /usr/local/bin/autossh
+chmod +x /usr/local/bin/my-ssh
 chmod 777 ~/.ssh/ssh_passwd
 chmod 777 ~/.ssh/autossh.exp
 
